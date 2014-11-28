@@ -14,8 +14,8 @@ set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -Wall -Werror -std=gnu99")
 # Vous devez editer les lignes suivantes pour y mettre vos logins
 # et le numéro de la variante que vous avez choisi
 #########
-set(VARIANTE_LOGINS login1 login2 login3)
-set(VARIANTE_SUJET -1)
+set(VARIANTE_LOGINS vanbeurl  jeanr)
+set(VARIANTE_SUJET 4)
 ###
 list(SORT VARIANTE_LOGINS)
 if (VARIANTE_LOGINS MATCHES "login[123]")
@@ -33,7 +33,7 @@ configure_file (
 #####
 # Détection de la bibliothèque Readline
 #####
-find_library(READLINE_LIBRARY NAMES readline libreadline history libhistory) 
+find_library(READLINE_LIBRARY NAMES readline libreadline history libhistory)
 
 
 #########
@@ -44,7 +44,7 @@ find_library(READLINE_LIBRARY NAMES readline libreadline history libhistory)
 # Si vous utilisé plusieurs fichiers, en plus de ensishell.c, pour votre
 # shell il faut les ajouter ici
 ##
-add_executable(ensishell src/readcmd.c src/ensishell.c)
+add_executable(ensishell src/readcmd.c src/ensishell.c src/interpretor.c)
 target_link_libraries(ensishell readline history)
 
 ##

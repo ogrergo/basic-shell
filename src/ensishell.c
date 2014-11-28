@@ -10,6 +10,8 @@
 
 #include "variante.h"
 #include "readcmd.h"
+#include "interpretor.h"
+
 
 #ifndef VARIANTE
 #error "Variante non défini !!"
@@ -17,11 +19,11 @@
 
 int main() {
         printf("Variante %d: %s\n", VARIANTE, VARIANTE_STRING);
-
+        init();
 	while (1) {
 		struct cmdline *l;
-		int i, j;
 		char *prompt = "ensishell>";
+
 
 		l = readcmd(prompt);
 
@@ -37,18 +39,6 @@ int main() {
 			continue;
 		}
 
-		if (l->in) printf("in: %s\n", l->in);
-		if (l->out) printf("out: %s\n", l->out);
-		if (l->bg) printf("background (&)\n");
-
-		/* Display each command of the pipe */
-		for (i=0; l->seq[i]!=0; i++) {
-			char **cmd = l->seq[i];
-			printf("seq[%d]: ", i);
-                        for (j=0; cmd[j]!=0; j++) {
-                                printf("'%s' ", cmd[j]);
-                        }
-			printf("\n");
-		}
+    	interpret_seq(l);
 	}
 }
